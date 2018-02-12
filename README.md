@@ -54,16 +54,16 @@ A script [serial.sh](https://github.com/CERT-MC/USB-whitelisting/blob/master/scr
 All you need to do is execute the script, insert a device, hit the ENTER key and unplug the device. The serial should be displayed. Repeat the steps for each of your devices.
 
     user@host:~# ./serial.sh 
-    60A44C3FAE22B0[enter]
-    60A44C4138D1BF[enter]
-    16040000000330[enter]
+    60A44C3FAE[enter]
+    60A44C4138[enter]
+    1604000000[enter]
 
 When you're done, just type the "q" key and the set of lines will be displayed. 
 
     [q]
-    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="1604000000033005", ENV{OK}="1"
-    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="60A44C3FAE22B01139790017", ENV{OK}="1"
-    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="60A44C4138D1BFB17808B1D5", ENV{OK}="1"
+    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="1604000000", ENV{OK}="1"
+    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="60A44C3FAE", ENV{OK}="1"
+    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="60A44C4138", ENV{OK}="1"
 
 
 You have to copy those lines into your 99-udisks2.rules file, in the "# LIST OF AUTHORIZED USB DEVICES" section.
