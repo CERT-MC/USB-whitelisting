@@ -10,3 +10,35 @@ This set of scripts is aimed at allowing only specific USB devices (whitelist) t
 The scripts have been tested successfully on a XUBUNTU 16.04 LTS distribution.
 
 There are no particular requirements or dependencies. If you intend to use email alerting, you only need to install a mailer daemon such as Postfix and the mailutils package.
+
+## Installation
+
+You need to copy 99-udisks2.rules(https://github.com/CERT-MC/USB-whitelisting/blob/master/scripts/99-udisks2.rules) in the /etc/udev/rules.d/ directory of your system and to reload new udev rules
+
+    sudo wget -o /etc/udev/rules.d/99-udisks2.rules https://github.com/CERT-MC/USB-whitelisting/blob/master/scripts/99-udisks2.rules
+    sudo udevadm control --reload
+
+As you can see in this file, a list of authorized devices has been provided as an example. Obviously you'll have to delete those lines and add your personal devices instead.
+
+    # LIST OF AUTHORIZED USB DEVICES
+    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="160400005", ENV{OK}="1"
+    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="182E9D", ENV{OK}="1"
+    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="60A44C413812", ENV{OK}="1"
+
+Download the script usb.sh(https://github.com/CERT-MC/USB-whitelisting/blob/master/scripts/usb.sh) and copy it into your /usr/local/sbin directory
+
+    sudo wget -o /usr/local/sbin/usb.sh https://github.com/CERT-MC/USB-whitelisting/blob/master/scripts/usb.sh
+    sudo chmod 700 /usr/local/sbin/usb.sh
+
+From now on, the restriction are in place and only specifically allowed USB devices will be mounted on your system and will be displayed on your desktop.
+
+A logfile is appended each time a USB device is inserted of the system.
+
+## Generation of USB devices list
+
+A script serial.sh(https://github.com/CERT-MC/USB-whitelisting/blob/master/scripts/serial.sh) is provided to help you generate the list of allowed USB devices.
+
+All you need to do is execute the script, and hit the ENTER key after each device has been inserted.
+
+When you're done, just type the "q" key and the set of lines will be displayed. You have to copy those lines into your 99-udisks2.rules file, in the "# LIST OF AUTHORIZED USB DEVICES" section.
+
