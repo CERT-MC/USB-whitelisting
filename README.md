@@ -30,9 +30,9 @@ Download the script [usb.sh](https://github.com/CERT-MC/USB-whitelisting/blob/ma
     sudo wget -o /usr/local/sbin/usb.sh https://github.com/CERT-MC/USB-whitelisting/blob/master/scripts/usb.sh
     sudo chmod 700 /usr/local/sbin/usb.sh
 
-From now on, the restriction are in place and only specifically allowed USB devices will be mounted on your system and will be displayed on your desktop.
+From now on, the restrictions are in place and only specifically allowed USB devices will be mounted on your system and will be displayed on your desktop.
 
-A logfile (/var/log/usb.log) is appended each time a USB device is inserted of the system.
+A logfile (/var/log/usb.log by default) is appended each time a USB device is inserted of the system, for security purpose.
 
     09/02/18-15:07:15 - USB device plugged : /dev/sdc1 (60A44C3FAE22) - user alice  - connection forbidden
     09/02/18-15:07:51 - USB device unplugged :  (60A44C3FAE22) - user alice
@@ -42,7 +42,7 @@ A logfile (/var/log/usb.log) is appended each time a USB device is inserted of t
     09/02/18-15:09:16 - USB device plugged : /dev/sdb1 (1604000000033) - user bob  - connection allowed
     09/02/18-15:10:04 - USB device unplugged :  (1604000000033) - user bob
 
-If you wish to warn the sysadmin each time a unknow USB device is plugged to the system, you can configure the USB.SH script
+If you wish to warn the sysadmin, each time a unknow USB device is plugged to the system, you can configure the USB.SH script as below.
 
     mailadmin=true
 	alertdest="root@localhost"
@@ -51,7 +51,17 @@ If you wish to warn the sysadmin each time a unknow USB device is plugged to the
 
 A script [serial.sh](https://github.com/CERT-MC/USB-whitelisting/blob/master/scripts/serial.sh) is provided to help you generate the list of allowed USB devices.
 
-All you need to do is execute the script, and hit the ENTER key after each device has been inserted.
+All you need to do is execute the script, insert a device, hit the ENTER key and unplug the device. The serial should be displayed. Repeat the steps for each of your devices.
+
+root@bruno-virtual-machine:~# ./serial.sh 
+    60A44C3FAE22B0[enter]
+    60A44C4138D1BF[enter]
+    16040000000330[enter]
+    [q]
+    
+    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="1604000000033005", ENV{OK}="1"
+    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="60A44C3FAE22B01139790017", ENV{OK}="1"
+    ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="60A44C4138D1BFB17808B1D5", ENV{OK}="1"
 
 When you're done, just type the "q" key and the set of lines will be displayed. You have to copy those lines into your 99-udisks2.rules file, in the "# LIST OF AUTHORIZED USB DEVICES" section.
 
