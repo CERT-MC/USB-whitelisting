@@ -32,7 +32,20 @@ Download the script [usb.sh](https://github.com/CERT-MC/USB-whitelisting/blob/ma
 
 From now on, the restriction are in place and only specifically allowed USB devices will be mounted on your system and will be displayed on your desktop.
 
-A logfile is appended each time a USB device is inserted of the system.
+A logfile (/var/log/usb.log) is appended each time a USB device is inserted of the system.
+
+    09/02/18-15:07:15 - USB device plugged : /dev/sdc1 (60A44C3FAE22) - user alice  - connection forbidden
+    09/02/18-15:07:51 - USB device unplugged :  (60A44C3FAE22) - user alice
+    09/02/18-15:07:55 - USB device plugged : /dev/sdc1 (60A44C3FAE22) - user alice  - connection forbidden
+    09/02/18-15:09:03 - USB device unplugged :  (60A44C3FAE22) - user alice
+    09/02/18-15:09:04 - USB device unplugged :  (1828CE9D) - user alice 
+    09/02/18-15:09:16 - USB device plugged : /dev/sdb1 (1604000000033) - user bob  - connection allowed
+    09/02/18-15:10:04 - USB device unplugged :  (1604000000033) - user bob
+
+If you wish to warn the sysadmin each time a unknow USB device is plugged to the system, you can configure the USB.SH script
+
+    mailadmin=true
+	alertdest="root@localhost"
 
 ## Generation of USB devices list
 
