@@ -53,12 +53,12 @@ A script [serial.sh](https://github.com/CERT-MC/USB-whitelisting/blob/master/scr
 
 All you need to do is execute the script, insert a device, hit the ENTER key and unplug the device. The serial should be displayed. Repeat the steps for each of your devices.
 
-root@bruno-virtual-machine:~# ./serial.sh 
+    user@host:~# ./serial.sh 
     60A44C3FAE22B0[enter]
     60A44C4138D1BF[enter]
     16040000000330[enter]
     [q]
-    
+
     ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="1604000000033005", ENV{OK}="1"
     ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="60A44C3FAE22B01139790017", ENV{OK}="1"
     ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="60A44C4138D1BFB17808B1D5", ENV{OK}="1"
