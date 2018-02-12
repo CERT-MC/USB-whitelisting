@@ -57,11 +57,14 @@ All you need to do is execute the script, insert a device, hit the ENTER key and
     60A44C3FAE22B0[enter]
     60A44C4138D1BF[enter]
     16040000000330[enter]
-    [q]
 
+When you're done, just type the "q" key and the set of lines will be displayed. 
+
+    [q]
     ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="1604000000033005", ENV{OK}="1"
     ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="60A44C3FAE22B01139790017", ENV{OK}="1"
     ACTION=="add", ENV{ID_FS_USAGE}=="filesystem", ENV{ID_SERIAL_SHORT}=="60A44C4138D1BFB17808B1D5", ENV{OK}="1"
 
-When you're done, just type the "q" key and the set of lines will be displayed. You have to copy those lines into your 99-udisks2.rules file, in the "# LIST OF AUTHORIZED USB DEVICES" section.
+
+You have to copy those lines into your 99-udisks2.rules file, in the "# LIST OF AUTHORIZED USB DEVICES" section.
 
